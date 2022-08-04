@@ -38,7 +38,7 @@ jobs:
 
           git commit -am "GH ACTION Headlines $(date)"
           
-          git pull origin main
+          
           git push -f origin main
 
       
