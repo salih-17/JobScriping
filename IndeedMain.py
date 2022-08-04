@@ -19,7 +19,7 @@ my_conn = create_engine("mysql+pymysql://admin:12345678@database-1.ciaff8ckhmlj.
 worldwidelinks = pd.read_csv ('worldwidelink.csv').set_index ('CountryName')
 #------------------------------------------------------------
 
-filterdate = 2
+filterdate = 1
 position = 'data'
 totalpostion = 0
 
