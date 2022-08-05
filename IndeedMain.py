@@ -20,7 +20,7 @@ worldwidelinks = pd.read_csv ('worldwidelink.csv').set_index ('CountryName')
 #------------------------------------------------------------
 
 filterdate = 1
-position = 'frontend'
+position = 'data'
 totalpostion = 0
 
 #------------------------------------------------------------
@@ -217,7 +217,7 @@ def main():
     df2 = pd.DataFrame(ff)
     df2.to_sql (con =my_conn , name = 'IndeedDataSet5' , if_exists = 'append' , index = False )
     #file_name = str(int(random.random()*12345)) + "_df.xlsx"
-    df2.to_csv("frontend1.csv")
+    df2.to_csv("data2.csv")
     
 if __name__ == '__main__':
   main()
