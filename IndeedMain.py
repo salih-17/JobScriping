@@ -216,8 +216,13 @@ def main():
     ff = gatheringdata(dd)
     df2 = pd.DataFrame(ff)
     df2.to_sql (con =my_conn , name = 'IndeedDataSet5' , if_exists = 'append' , index = False )
-    #file_name = str(int(random.random()*12345)) + "_df.xlsx"
-    df2.to_csv("data2.csv")
+    try:
+      file_name = str(int(random.random()*12345)) + "_df.xlsx"
+      df2.to_excel(file_name)
+    except:
+      file_name = str(int(random.random()*12345)) + "_df.csv"
+      df2.to_csv(file_name)
+
     
 if __name__ == '__main__':
   main()
