@@ -20,7 +20,7 @@ worldwidelinks = pd.read_csv ('worldwidelink.csv').set_index ('CountryName')
 #------------------------------------------------------------
 
 filterdate = 1
-position = 'frontend%20developer'
+position = 'data'
 totalpostion = 0
 
 #------------------------------------------------------------
