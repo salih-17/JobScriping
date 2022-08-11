@@ -11,6 +11,17 @@ from datetime import timedelta
 from datetime import date
 import re
 
+from requests.structures import CaseInsensitiveDict
+
+
+headers = CaseInsensitiveDict()
+headers["Connection"] = "keep-alive"
+headers["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36"
+headers["Upgrade-Insecure-Requests"] = "1"
+headers["Accept"] = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
+headers["Accept-Language"] = "en-US,en;q=0.9"
+headers["Accept-Encoding"] = "gzip, deflate"
+
 
 my_conn = create_engine("mysql+pymysql://admin:12345678@database-1.ciaff8ckhmlj.us-west-2.rds.amazonaws.com:3306/IndeedDataBase")
 
@@ -34,7 +45,7 @@ def collectinglinks ():
     url = worldwidelinks['WebURL'].loc[country]+'jobs?q={}&fromage={}'.format (position ,filterdate )
 
     #Gathering the baseline information
-    get = requests.get(url)
+    get = requests.get(url , headers=headers)
     soup = BeautifulSoup(get.text, 'html.parser')
     cards = len (soup.find_all('div', 'cardOutline'))
     totalpostion = totalpostion + cards
@@ -62,7 +73,7 @@ def collectinglinks ():
         #--------------------------------------------------------
         # Now we are using Beautifulsoup to get the number of results inside this page
 
-        get = requests.get(url2)
+        get = requests.get(url2, headers=headers)
         soup = BeautifulSoup(get.text, 'html.parser')
         cards = len (soup.find_all('div', 'cardOutline'))
         totalpostion = totalpostion + cards
@@ -82,7 +93,7 @@ def collectinglinks ():
 
 def fulldesc (link ):
 
-    get = requests.get(link)
+    get = requests.get(link, headers=headers)
     soup = BeautifulSoup(get.text, 'html.parser')
     text = soup.get_text()
 
@@ -102,7 +113,7 @@ def gatheringdata (pagelinks):
   for link in pagelinks:
       #--------------------------------------------------------
       # Now we are using Beautifulsoup to get the number of results
-      get = requests.get(link['URL'])
+      get = requests.get(link['URL'], headers=headers)
       soup = BeautifulSoup(get.text, 'html.parser')
       Posted_Date = 0
       #--------------------------------------------------------
